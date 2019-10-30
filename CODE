@@ -4,20 +4,19 @@ JS:
     fetchEmailHelper : function(component, event, helper) {
        
         var action = component.get("c.fetchEmailResultArchive");
-        var requestWrap =
-            {
-                contactID: component.get("v.recordId")
-            }
-          action.setParams(
-              {
-           		 "requestWrapParam": JSON.stringify(requestWrap)
-              });
+        var requestWrap = {
+        
+            contactID: component.get("v.recordId")
+        };
+        action.setParams({
+        
+           	"requestWrapParam": JSON.stringify(requestWrap)
+        });
      
-        action.setCallback(this, function(response)
-        {
+        action.setCallback(this, function(response) {
+        
             var state = response.getState();
-            if (state === "SUCCESS") 
-            {
+            if (state === "SUCCESS") {
             	component.set("v.emailList", response.getReturnValue().emailList);
             }
         });
@@ -32,28 +31,21 @@ public class ShowEmailResultArchiveController{
 
     
     
-    public class RequestWrap
-    {
+    public class RequestWrap{
 
         @AuraEnabled
         public String contactID { get; set; }
-
-       
     }
     
-    public class RespondWrap
-    {
+    public class RespondWrap{
 
         @AuraEnabled
         List<Individual_Email_Result_Archive__b> emailList { get; set; }
-
-       
     }
     
     
     @AuraEnabled
-    public static ShowEmailResultArchiveController.RespondWrap fetchEmailResultArchive(String requestWrapParam) 
-    {
+    public static ShowEmailResultArchiveController.RespondWrap fetchEmailResultArchive(String requestWrapParam)  {
         //declaration of wrapper
         ShowEmailResultArchiveController.RequestWrap reqWrap = new ShowEmailResultArchiveController.RequestWrap();
         ShowEmailResultArchiveController.RespondWrap respWrap =  new ShowEmailResultArchiveController.RespondWrap();
@@ -62,25 +54,7 @@ public class ShowEmailResultArchiveController{
         reqWrap = (RequestWrap) JSON.deserializeStrict(requestWrapParam, ShowEmailResultArchiveController.RequestWrap.class);
         system.debug('######### reqWrap  '+reqWrap.contactID);
         
-        String ContactID = [SELECT PersonContactId  FROM Account WHERE ID=:reqWrap.contactID].PersonContactId ;
-        
-        //Qyery 10 email Ind.
-        List<Individual_Email_Result_Archive__b> emailList = [SELECT 
-                                                          MergeId__c,
-                                                          Contact__c
-                                                     FROM Individual_Email_Result_Archive__b
-                                                    ];
-        
-        system.debug('######### org emailList  '+[SELECT 
-                                                          MergeId__c,
-                                                          Contact__c
-                                                     FROM Email_Result_Archive__b 
-                                                   
-                                                    ]);
-        
-        
         respWrap.emailList = emailList;
-        //return respwrap.
         return respWrap;
     }
    
