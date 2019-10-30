@@ -38,7 +38,7 @@ public class ShowEmailResultArchiveController{
         @AuraEnabled
         public String contactID { get; set; }
 	
-	public RequestWrapper(){}
+	public RequestWrap(){}
     }
     
     public class RespondWrap{
