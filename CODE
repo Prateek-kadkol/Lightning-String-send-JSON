@@ -18,7 +18,9 @@ JS:
             var state = response.getState();
             if (state === "SUCCESS") {
             	component.set("v.emailList", response.getReturnValue().emailList);
-            }
+            }else{
+            	console.log('@@@@@ Error '+response.getError()[0].message);
+			}
         });
         $A.enqueueAction(action);
     }
