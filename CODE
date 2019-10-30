@@ -51,7 +51,7 @@ public class ShowEmailResultArchiveController{
     
     
     @AuraEnabled
-    public static ShowEmailResultArchiveController.RespondWrap fetchEmailResultArchive(String requestWrapParam)  {
+    public static RespondWrap fetchEmailResultArchive(String requestWrapParam)  {
         //declaration of wrapper
         RequestWrap reqWrap = new RequestWrap();
         RespondWrap respWrap =  new RespondWrap();
