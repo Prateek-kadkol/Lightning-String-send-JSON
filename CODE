@@ -37,23 +37,27 @@ public class ShowEmailResultArchiveController{
 
         @AuraEnabled
         public String contactID { get; set; }
+	
+	public RequestWrapper(){}
     }
     
     public class RespondWrap{
 
         @AuraEnabled
         List<Individual_Email_Result_Archive__b> emailList { get; set; }
+	
+	public RespondWrap(){}
     }
     
     
     @AuraEnabled
     public static ShowEmailResultArchiveController.RespondWrap fetchEmailResultArchive(String requestWrapParam)  {
         //declaration of wrapper
-        ShowEmailResultArchiveController.RequestWrap reqWrap = new ShowEmailResultArchiveController.RequestWrap();
-        ShowEmailResultArchiveController.RespondWrap respWrap =  new ShowEmailResultArchiveController.RespondWrap();
+        RequestWrap reqWrap = new RequestWrap();
+        RespondWrap respWrap =  new RespondWrap();
         
         //deseriliaze.
-        reqWrap = (RequestWrap) JSON.deserializeStrict(requestWrapParam, ShowEmailResultArchiveController.RequestWrap.class);
+        reqWrap = (RequestWrap) JSON.deserializeStrict(requestWrapParam, RequestWrap.class);
         system.debug('######### reqWrap  '+reqWrap.contactID);
         
         respWrap.emailList = emailList;
