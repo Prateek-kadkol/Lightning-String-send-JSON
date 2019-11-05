@@ -17,7 +17,7 @@ JS:
         
             var state = response.getState();
             if (state === "SUCCESS") {
-            	component.set("v.emailList", response.getReturnValue().emailList);
+            	console.log(response.getReturnValue());
             }else{
             	console.log('@@@@@ Error '+response.getError()[0].message);
 			}
