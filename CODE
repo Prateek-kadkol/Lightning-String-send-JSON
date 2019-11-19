@@ -20,6 +20,7 @@ JS:
             	console.log(response.getReturnValue());
             }else{
             	console.log('@@@@@ Error '+response.getError()[0].message);
+		console.log('@@@@@ Error Location '+response.getError()[0].stackTrace);
 			}
         });
         $A.enqueueAction(action);
