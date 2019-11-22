@@ -1,13 +1,12 @@
-<!--- CMP Name ------->
-<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global"controller= " >
+<!--- CMP Name -->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
 
-<!-- aura hendler list -->
-<aura:handler name="init" action="{!c.doInit}" value="this"/>
- 
- <!-- attribute list -->
- <aura:attribute name="respWrap" type="Object" />
-  
-  </aura:component >
+    <!-- aura hendler list -->
+    <aura:handler name="init" action="{!c.doInit}" value="this"/>
+    
+    <!-- attribute list -->
+    <aura:attribute name="respWrap" type="Object" />
+</aura:component>  
   
 JS:
 
