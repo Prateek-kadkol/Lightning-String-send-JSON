@@ -1,3 +1,15 @@
+<!--- CMP Name ------->
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global"controller= " >
+
+<!-- aura hendler list -->
+<aura:handler name="init" action="{!c.doInit}" value="this"/>
+ 
+ <!-- attribute list -->
+ <aura:attribute name="respWrap" type="Object" />
+  
+  </aura:component >
+  
 JS:
 
 ({
@@ -17,7 +29,9 @@ JS:
         
             var state = response.getState();
             if (state === "SUCCESS") {
-            	console.log(response.getReturnValue());
+	        console.log(response.getReturnValue());
+	        var respWrap = response.getReturnValue();
+		component.set('v.respWrap',respWrap);
             }else{
             	console.log('@@@@@ Error '+response.getError()[0].message);
 		console.log('@@@@@ Error Location '+response.getError()[0].stackTrace);
