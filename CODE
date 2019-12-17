@@ -72,7 +72,7 @@ public class ShowEmailResultArchiveController{
     
     public class RespondWrap{
 
-        @AuraEnabled
+        @AuraEnabled public
         List<Individual_Email_Result_Archive__b> emailList { get; set; }
 	
 	public RespondWrap(){}
