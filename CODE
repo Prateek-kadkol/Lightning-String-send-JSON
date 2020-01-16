@@ -1,5 +1,5 @@
 <!--- CMP Name -->
-<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,force:hasSObjectName,flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable" access="global" >
 
     <!-- aura hendler list -->
     <aura:handler name="init" action="{!c.doInit}" value="this"/>
@@ -27,8 +27,8 @@ JS:
         
             var state = response.getState();
             if (state === "SUCCESS") {
-	        console.log(response.getReturnValue());
 	        var respWrap = response.getReturnValue();
+		console.log(respWrap);
 		component.set('v.respWrap',respWrap);
             }else{
             	console.log('@@@@@ Error '+response.getError()[0].message);
@@ -48,15 +48,15 @@ public class ShowEmailResultArchiveController{
     
     @AuraEnabled
     public static RespondWrap fetchEmailResultArchive(String requestWrapParam)  {
+    
         //declaration of wrapper
         RequestWrap reqWrap = new RequestWrap();
         RespondWrap respWrap =  new RespondWrap();
         
         //deseriliaze.
         reqWrap = (RequestWrap) JSON.deserializeStrict(requestWrapParam, RequestWrap.class);
-        system.debug('######### reqWrap  '+reqWrap.contactID);
         
-        respWrap.emailList = emailList;
+        respWrap.userId = UserInfo.getUserId();
         return respWrap;
     }
     
@@ -64,16 +64,14 @@ public class ShowEmailResultArchiveController{
     
     public class RequestWrap{
 
-        @AuraEnabled
-        public String contactID { get; set; }
+        @AuraEnabled public String userId; 
 	
 	public RequestWrap(){}
     }
     
     public class RespondWrap{
 
-        @AuraEnabled public
-        List<Individual_Email_Result_Archive__b> emailList { get; set; }
+        @AuraEnabled public string userId; 
 	
 	public RespondWrap(){}
     }
