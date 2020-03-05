@@ -25,7 +25,7 @@ JS helper:
         var action = component.get("c.serverMethodName");
         var requestWrap = {
         
-            contactID: component.get("v.recordId")
+            userId: component.get("v.recordId")
         };
         action.setParams({
         
