@@ -1,19 +1,28 @@
 <!--- CMP Name -->
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,force:hasSObjectName,flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable" access="global" >
+<aura:component 
+controller = 'lightningComponentController'
+implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,force:hasSObjectName,flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable" access="global" >
 
-    <!-- aura hendler list -->
+    <!-- aura handler list -->
     <aura:handler name="init" action="{!c.doInit}" value="this"/>
     
     <!-- attribute list -->
     <aura:attribute name="respWrap" type="Object" />
 </aura:component>  
   
-JS:
-
+JS controller:
 ({
-    fetchEmailHelper : function(component, event, helper) {
+    doInit : function(component, event, helper) {
        
-        var action = component.get("c.fetchEmailResultArchive");
+        helper.callServer(component, event, helper);
+    }
+})
+
+JS helper:
+({
+    callServer : function(component, event, helper) {
+       
+        var action = component.get("c.serverMethodName");
         var requestWrap = {
         
             contactID: component.get("v.recordId")
@@ -42,12 +51,12 @@ JS:
 
 APEX:
 
-public class ShowEmailResultArchiveController{
+public class lightningComponentController{
 
     
     
     @AuraEnabled
-    public static RespondWrap fetchEmailResultArchive(String requestWrapParam)  {
+    public static RespondWrap serverMethodName(String requestWrapParam)  {
     
         //declaration of wrapper
         RequestWrap reqWrap = new RequestWrap();
@@ -66,14 +75,12 @@ public class ShowEmailResultArchiveController{
 
         @AuraEnabled public String userId; 
 	
-	public RequestWrap(){}
     }
     
     public class RespondWrap{
 
         @AuraEnabled public string userId; 
 	
-	public RespondWrap(){}
     }
    
 }
